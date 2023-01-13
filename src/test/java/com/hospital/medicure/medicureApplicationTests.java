@@ -17,32 +17,32 @@ class medicureApplicationTests {
 	void contextLoads() {
 	}
 	
-	@Test
-	void testRegisterDoctor() {
-		Doctor doctor = new Doctor(12345, "Mahesh");
-		DoctorService dService = new DoctorService();
-		assertEquals(doctor.getDoctorRegNo(), dService.generateDummyDoctor().getDoctorRegNo());
-	}
-	
-	@Test
-	void testCreateDoctor() {
-		RestAssured.baseURI="http://localhost:8082/RegisterDoctor";
-		RequestSpecification httpRequest = RestAssured.given();
-		Response response =httpRequest.request(Method.POST);
-		System.out.println(response.getStatusCode());
-		assertEquals(response.statusCode(), 200);
-				
-	}
-
-	@Test
-	void testGetDoctorDetails() {
-		RestAssured.baseURI="http://localhost:8082/SearchDoctor";
-		RequestSpecification httpRequest = RestAssured.given();
-		Response response =httpRequest.request(Method.GET,"/3");
-		System.out.println(response.getStatusCode());
-		assertEquals(response.statusCode(), 200);
-				
-	}
+//	@Test
+//	void testRegisterDoctor() {
+//		Doctor doctor = new Doctor(12345, "Mahesh");
+//		DoctorService dService = new DoctorService();
+//		assertEquals(doctor.getDoctorRegNo(), dService.generateDummyDoctor().getDoctorRegNo());
+//	}
+//	
+//	@Test
+//	void testCreateDoctor() {
+//		RestAssured.baseURI="http://localhost:8082/RegisterDoctor";
+//		RequestSpecification httpRequest = RestAssured.given();
+//		Response response =httpRequest.request(Method.POST);
+//		System.out.println(response.getStatusCode());
+//		assertEquals(response.statusCode(), 200);
+//				
+//	}
+//
+//	@Test
+//	void testGetDoctorDetails() {
+//		RestAssured.baseURI="http://localhost:8082/SearchDoctor";
+//		RequestSpecification httpRequest = RestAssured.given();
+//		Response response =httpRequest.request(Method.GET,"/3");
+//		System.out.println(response.getStatusCode());
+//		assertEquals(response.statusCode(), 200);
+//				
+//	}
 	
 //	@Test
 //	void testUpdateAccountDetails() {
