@@ -1,0 +1,35 @@
+- name: Install Grafana
+  hosts : localhost
+  become: yes
+  become_user: root
+  tasks:
+    - name: Import GPG key
+      command: wget -q -O - https://packages.grafana.com/gpg.key | gpg --dearmor | tee /usr/share/keyrings/grafana.gpg > /dev/null
+
+    - name: Add Grafana repository to sources list
+      lineinfile:
+        path: /etc/apt/sources.list.d/grafana.list
+        line: "deb [signed-by=/usr/share/keyrings/grafana.gpg] https://packages.grafana.com/oss/deb stable main"
+        state: present
+
+    - name: Update package list
+      apt:
+        update_cache: yes
+
+    - name: Install Grafana
+      apt:
+        name: grafana
+        state: latest
+
+    - name: Start Grafana service
+      service:
+        name: grafana-server
+        state: started
+
+    - name: Check status of Grafana service
+      command: systemctl status grafana-server
+
+    - name: Enable Grafana service to start on boot
+      command: systemctl enable grafana-server
+
+

@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                sh 'terraform plan'
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    def output = sh(returnStdout: true, script: 'terraform apply -auto-approve').trim()
+                    def ip_address = output.split('\n')[-1].split(':')[1].trim()
+                }
+                env.IP_ADDRESS = ip_address
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Instance IP address: ${env.IP_ADDRESS}"
+            }
+        }
+    }
+}

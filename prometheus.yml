@@ -1,0 +1,34 @@
+- name: Install Prometheus
+  hosts: localhost
+  become: yes
+  become_user: root
+  tasks:
+  - name: Update package list
+    apt:
+      update_cache: yes
+  - name: Import Prometheus key
+    command: wget https://s3-eu-west-1.amazonaws.com/deb.robustperception.io/41EFC99D.gpg | apt-key add -
+
+  - name: Update package list
+    apt:
+      update_cache: yes
+
+  - name: Install Prometheus and its components
+    apt:
+      name:
+      - prometheus
+      - prometheus-node-exporter
+      - prometheus-pushgateway
+      - prometheus-alertmanager
+      state: latest
+      update_cache: yes
+
+  - name: Check status of Prometheus service
+    command: systemctl status prometheus
+
+  - name: Check status of firewall
+    command: ufw status
+
+  - name: Allow port 9090 for Prometheus
+    command: ufw allow 9090
+

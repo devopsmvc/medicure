@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>MEDICURE - Super Specialty Hospital</h1>
+    <body bgcolor="#999499d">
+    <p><h3>Open Your Account</h3> <a href="/greeting">here</a></p>
+    
+    
+   <div align="center">
+   
+   <a href="@{RegisterDoctor}">RegisterDoctor</a> |   
+   <a href="@{UpdateDoctor}">UpdateDoctor</a> |
+   <a href="@{SearchDoctor}">SearchDoctor</a> |
+   <a href="@{DeleteDcotor}">DeleteDoctor</a> | 
+   </div>
+   
+	<form action="/action_page.php">
+  		<h3> <p style="color:blue;">
+  		<label for="fname">First Name:</label>
+  		<input type="text" id="fname" name="fname"><br><br>
+  		<label for="lname">Last Name:</label>
+  		<input type="text" id="lname" name="lname"><br><br>
+  		<label for="lname">Email ID:</label>
+  		<input type="text" id="email" name="email"><br><br>
+  		<label for="lname">Contact Number:</label>
+  		<input type="text" id="contact" name="contact"><br><br>
+  		<input type="submit" id="submit" name="submit" value="Submit">
+		</p>
+  		</h3>
+	</form>
+	
+</body>
+</html>
