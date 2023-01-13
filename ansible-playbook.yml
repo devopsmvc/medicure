@@ -20,7 +20,7 @@
     shell: docker stop $(docker ps -a -q)
 
   - name: Deploying FinanceMe Application Using Docker
-    command: docker run -itd -p 8082:8081 devopsmvc/financeme:1.0
+    command: docker run -itd -p 8082:8081 devopsmvc/medicure:1.0
 
   - name: Deploying node-exporter
     command: docker run -itd -p 9100:9100 prom/node-exporter

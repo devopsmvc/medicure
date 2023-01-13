@@ -18,7 +18,7 @@ node{
     stage('git code checkout'){
         try{
             echo 'checkout the code from git repository'
-            git branch: 'main', url: 'https://github.com/devopsmvc/financeme.git'
+            git branch: 'main', url: 'https://github.com/devopsmvc/medicure.git'
         }
         catch(Exception e){
             echo 'Exception occured in Git Code Checkout Stage'
@@ -36,19 +36,19 @@ node{
     }
     
     stage('publish test reports'){
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/Financeme/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/medicure/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
     }
     
     stage('Containerize the application'){
         echo 'Creating Docker image'
-        sh "${dockerCMD} build -t devopsmvc/financeme:${tagName} ."
+        sh "${dockerCMD} build -t devopsmvc/medicure:${tagName} ."
     }
     
     stage('Pushing it ot the DockerHub'){
         echo 'Pushing the docker image to DockerHub'
         withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
         sh "${dockerCMD} login -u devopsmvc -p ${dockerhub}"
-        sh "${dockerCMD} push devopsmvc/financeme:${tagName}"
+        sh "${dockerCMD} push devopsmvc/medicure:${tagName}"
             
         }
     }
